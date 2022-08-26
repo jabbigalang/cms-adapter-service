@@ -1,28 +1,17 @@
 package com.chrisen.cms.model;
 
-import org.springframework.http.HttpStatus;
-
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class ApiResponse {
     private int code;
-    private String status;
     private String message;
-    private Object data;
-
-    public ApiResponse(HttpStatus httpStatus, String message) {
-        this.code = httpStatus.value();
-        this.status = httpStatus.name();
-        this.message = message;
-    }
-
-    public ApiResponse(HttpStatus httpStatus, String message, Object data) {
-        this.code = httpStatus.value();
-        this.status = httpStatus.name();
-        this.message = message;
-        this.data = data;
-    }
 }
