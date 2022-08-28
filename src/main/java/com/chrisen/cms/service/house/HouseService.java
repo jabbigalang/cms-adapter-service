@@ -1,4 +1,4 @@
-package com.chrisen.cms.service.household;
+package com.chrisen.cms.service.house;
 
 import org.springframework.stereotype.Component;
 

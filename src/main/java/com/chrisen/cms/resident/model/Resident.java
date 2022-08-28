@@ -1,4 +1,4 @@
-package com.chrisen.cms.model;
+package com.chrisen.cms.resident.model;
 
 import javax.validation.constraints.NotBlank;
 
