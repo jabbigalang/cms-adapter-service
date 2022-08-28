@@ -1,4 +1,4 @@
-package com.chrisen.cms.service.vehicle;
+package com.chrisen.cms.vehicle;
 
 import org.springframework.stereotype.Component;
 

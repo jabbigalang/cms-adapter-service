@@ -2,6 +2,8 @@ package com.chrisen.cms.controller;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,30 +25,60 @@ public class ResidentController {
     private ResidentService residentService;
 
     @GetMapping
-    public List<Resident> getResidents() {
-        return residentService.getResidents();
+    public ResponseEntity<ApiResponse> getResidents() {
+        List<Resident> residentList = residentService.getResidents();
+        return new ResponseEntity<ApiResponse>(
+            new ApiResponse(
+                HttpStatus.OK.value(), 
+                "Found residents", 
+                residentList), 
+            HttpStatus.OK);
     }
 
     @PostMapping
-    public Resident createResident(@RequestBody Resident resident) {
-        return residentService.createResident(resident);
+    public ResponseEntity<ApiResponse> createResident(@RequestBody Resident resident) {
+        Resident createdResident = residentService.createResident(resident);
+        return new ResponseEntity<ApiResponse>(
+            new ApiResponse(
+                HttpStatus.CREATED.value(), 
+                "Created resident " + createdResident.getId(), 
+                createdResident), 
+            HttpStatus.CREATED);
     }
 
     @GetMapping("/{residentId}")
-    public Resident getResident(@PathVariable String residentId) {
-        return residentService.getResident(residentId);
+    public ResponseEntity<ApiResponse> getResident(@PathVariable String residentId) {
+        Resident resident = residentService.getResident(residentId);
+        return new ResponseEntity<ApiResponse>(
+            new ApiResponse(
+                HttpStatus.OK.value(), 
+                "Found resident " + resident.getId(), 
+                resident), 
+            HttpStatus.OK);
     }
 
     @PutMapping("/{residentId}")
-    public Resident updateResident(
+    public ResponseEntity<ApiResponse> updateResident(
         @PathVariable String residentId,
         @RequestBody Resident resident) {
-        return residentService.updateResident(residentId, resident);
+        Resident updatedResident = residentService.updateResident(residentId, resident);
+        return new ResponseEntity<ApiResponse>(
+            new ApiResponse(
+                HttpStatus.OK.value(), 
+                "Updated resident " + updatedResident.getId(), 
+                updatedResident), 
+            HttpStatus.OK);
     }
 
     @DeleteMapping("/{residentId}")
-    public ApiResponse deleteResident( @PathVariable String residentId) {
-        return residentService.deleteResident(residentId);
+    public ResponseEntity<ApiResponse> deleteResident( @PathVariable String residentId) {
+        residentService.deleteResident(residentId);
+        return new ResponseEntity<ApiResponse>(
+            new ApiResponse(
+                HttpStatus.OK.value(), 
+                "Deleted resident " + residentId, 
+                null), 
+            HttpStatus.OK);
     }
     
 }

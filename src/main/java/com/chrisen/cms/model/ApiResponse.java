@@ -14,4 +14,5 @@ import lombok.ToString;
 public class ApiResponse {
     private int code;
     private String message;
+    private Object body;
 }

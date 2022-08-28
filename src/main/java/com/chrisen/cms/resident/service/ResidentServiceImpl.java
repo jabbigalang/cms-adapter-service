@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.chrisen.cms.model.ApiResponse;
+import com.chrisen.cms.exception.CmsRecordNotFoundException;
 import com.chrisen.cms.resident.model.Resident;
 import com.chrisen.cms.resident.repository.ResidentRepository;
 import lombok.AllArgsConstructor;
@@ -33,14 +33,24 @@ public class ResidentServiceImpl implements ResidentService {
     @Override
     public Resident updateResident(String residentId, Resident resident) {
         Resident oldResident = repository.findById(residentId);
+
+        if (oldResident == null) {
+            throw new CmsRecordNotFoundException("No record found for id " + residentId);
+        }
+
         resident.setId(oldResident.getId());
         return repository.save(resident);
     }
 
     @Override
-    public ApiResponse deleteResident(String residentId) {
+    public void deleteResident(String residentId) {
+        Resident resident = repository.findById(residentId);
+
+        if (resident == null) {
+            throw new CmsRecordNotFoundException("No record found for id " + residentId);
+        }
+
         repository.deleteById(residentId);
-        return null;
     }
     
 }

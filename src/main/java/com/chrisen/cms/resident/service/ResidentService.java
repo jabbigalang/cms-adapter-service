@@ -3,8 +3,6 @@ package com.chrisen.cms.resident.service;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
-
-import com.chrisen.cms.model.ApiResponse;
 import com.chrisen.cms.resident.model.Resident;;
 
 @Component
@@ -18,6 +16,6 @@ public interface ResidentService {
 
     Resident updateResident(String residentId, Resident resident);
 
-    ApiResponse deleteResident(String residentId);
+    void deleteResident(String residentId);
 
 }
